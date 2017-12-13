@@ -1,0 +1,19 @@
+div{
+    text-align:center;
+}
+
+#fileUpload{
+    margin: 5px auto;
+}
+
+hr{
+    border-color: blue;
+}
+
+#indexUL{
+    border: 1px darkgrey solid;
+}
+
+#indexUL li{
+    padding: 3px;
+}
