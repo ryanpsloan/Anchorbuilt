@@ -130,7 +130,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                             $code = '03'; //Vacation
                             break;
                         case 'TRAVE':
-                            $code = '25'; //Other?
+                            $code = '25'; //Travel
                             break;
                         case 'HOL':
                             $code = '05'; //Holiday
