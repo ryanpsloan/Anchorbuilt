@@ -85,16 +85,17 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
         }
         //close file reading stream
         fclose($handle);
-        var_dump($fileData);
+        //var_dump($fileData);
 
 
         $data = $sum = array();
         foreach($fileData as $key => $arr){
             if($arr != false) {
-                if($arr[4] != '***DONOTPRINT***') {
+                //pay-rate is not empty
+                if($arr[12] != '') {
+                    //employee-no is not empty
                     if($arr[17] != ''){
-                    //if($arr[11] != 'ADJ' && $arr[17] != ''){
-                        $data[$arr[4]][$arr[5]][$arr[11]][] = array('EE Number' => $arr[17], 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => $arr[15]);
+                        $data[$arr[17]][$arr[5]][$arr[11]][] = array('EE Number' => $arr[17], 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => $arr[15]);
                         $sum[] = (float) $arr[26];
                         $totalHours[] = (float) $arr[25];
                     }
@@ -102,7 +103,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
 
             }
         }
-        var_dump("DATA", $data);
+        //var_dump("DATA", $data);
 
         $output = array();
         foreach($data as $ee => $array){
@@ -114,22 +115,25 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                             $code = '';
                             break;
                         case 'REG':
-                            $code = '';
+                            $code = '01'; //Regular
                             break;
                         case 'OT':
-                            $code = '';
+                            $code = '02'; //OT
                             break;
                         case 'PDIEM':
-                            $code = '';
+                            $code = '20'; //PerDiem
                             break;
                         case 'PRO':
-                            $code = '';
+                            $code = '07'; //Salary
                             break;
                         case 'PTO':
-                            $code = '';
+                            $code = '03'; //Vacation
                             break;
                         case 'TRAVE':
-                            $code = '';
+                            $code = '25'; //Other?
+                            break;
+                        case 'HOL':
+                            $code = '05'; //Holiday
                             break;
                     }
 
@@ -138,12 +142,12 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                         $amount = $value['amount'];
                         $rate = $value['rate'];
                         $dept = $value['dept'];
-                        $output[] = array($ee,'',$dept,'','','E',$code,(string) $rate, (string) $hours,'','','','','',$amount,'','','','','','','','','','','','','','');
+                        $output[] = array($ee,'',$dept,'','','E',$code,(string) $rate, (string) $hours,'','','','','',(string) $amount,'','','','','','','','','','','','','','');
                     }
                 }
             }
         }
-        var_dump("OUTPUT", $output);
+        //var_dump("OUTPUT", $output);
         $month = $today->format("m");
         $day = $today->format('d');
         $year = $today->format('y');
