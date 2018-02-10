@@ -93,9 +93,9 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
             if($arr != false) {
                 //pay-rate is not empty
                 if($arr[12] != '') {
-                    //employee-no is not empty
+                    //employee-num is not empty
                     if($arr[17] != ''){
-                        $data[$arr[17]][$arr[5]][$arr[11]][] = array('EE Number' => $arr[17], 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => $arr[15]);
+                        $data[$arr[17]][$arr[5]][$arr[11]][] = array('EE Number' => $arr[17], 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => ucfirst(strtolower($arr[15])));
                         $sum[] = (float) $arr[26];
                         $totalHours[] = (float) $arr[25];
                     }
