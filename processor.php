@@ -95,7 +95,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                 if($arr[12] != '') {
                     //employee-num is not empty
                     if($arr[17] != ''){
-                        $data[$arr[17]][$arr[5]][$arr[11]][] = array('EE Number' => $arr[17], 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => ucfirst(strtolower($arr[15])));
+                        $data[trim($arr[17])][$arr[5]][$arr[11]][] = array('EE Number' => trim($arr[17]), 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => ucfirst(strtolower(trim($arr[15]))));
                         $sum[] = (float) $arr[26];
                         $totalHours[] = (float) $arr[25];
                     }
@@ -110,7 +110,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
             foreach($array as $name => $arr){
                 foreach($arr as $key => $a){
                     $code = '';
-                    switch($key){
+                    switch(trim($key)){
                         case 'ADJ':
                             $code = '';
                             break;
@@ -136,7 +136,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                             $code = '05'; //Holiday
                             break;
                     }
-
+                    //var_dump($code, $key);
                     foreach($a as $k => $value){
                         $hours = $value['hours'];
                         $amount = $value['amount'];
@@ -163,7 +163,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
         $_SESSION['empCount'] = count($data);
         $_SESSION['totPaid'] = array_sum($sum);
         $_SESSION['totHrs'] = round(array_sum($totalHours),2);
-        header('Location: index.php');
+       // header('Location: index.php');
     }catch(Exception $e){
         $_SESSION['error'] = $e->getMessage();
         header('Location: index.php');
