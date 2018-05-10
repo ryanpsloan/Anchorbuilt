@@ -95,7 +95,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                 if($arr[12] != '') {
                     //employee-num is not empty
                     if($arr[17] != ''){
-                        $data[trim($arr[17])][$arr[5]][$arr[11]][] = array('EE Number' => trim($arr[17]), 'time' => $arr[11], 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => ucfirst(strtolower(trim($arr[15]))));
+                        $data[trim($arr[17])][trim($arr[5])][trim($arr[11])][] = array('EE Number' => trim($arr[17]), 'time' => trim($arr[11]), 'hours' => (float) $arr[25], 'amount' => (float) $arr[26], 'rate' => (float) $arr[12], 'dept' => ucfirst(strtolower(trim($arr[15]))));
                         $sum[] = (float) $arr[26];
                         $totalHours[] = (float) $arr[25];
                     }
@@ -142,7 +142,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                         $amount = $value['amount'];
                         $rate = $value['rate'];
                         $dept = $value['dept'];
-                        $output[] = array($ee,'',$dept,'','','E',$code,(string) $rate, (string) $hours,'','','','','',(string) $amount,'','','','','','','','','','','','','','');
+                        $output[] = array($ee,'',$dept,'','','E',$code,(string) $rate, (string) $hours,'','','','','',''/*(string) $amount*/,'','','','','','','','','','','','','','');
                     }
                 }
             }
@@ -163,7 +163,7 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
         $_SESSION['empCount'] = count($data);
         $_SESSION['totPaid'] = array_sum($sum);
         $_SESSION['totHrs'] = round(array_sum($totalHours),2);
-       // header('Location: index.php');
+        header('Location: index.php');
     }catch(Exception $e){
         $_SESSION['error'] = $e->getMessage();
         header('Location: index.php');
