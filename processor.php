@@ -113,36 +113,43 @@ if(isset($_FILES)) { //Check to see if a file is uploaded
                     switch(trim($key)){
                         case 'ADJ':
                             $code = '';
+                            $amount = (string) $value['amount'];
                             break;
                         case 'REG':
                             $code = '01'; //Regular
+                            $amount = '';
                             break;
                         case 'OT':
                             $code = '02'; //OT
+                            $amount = '';
                             break;
                         case 'PDIEM':
                             $code = '20'; //PerDiem
+                            $amount = (string) $value['amount'];
                             break;
                         case 'PRO':
                             $code = '07'; //Salary
+                            $amount = '';
                             break;
                         case 'PTO':
                             $code = '03'; //Vacation
+                            $amount = '';
                             break;
                         case 'TRAVE':
                             $code = '25'; //Travel
+                            $amount = '';
                             break;
                         case 'HOL':
                             $code = '05'; //Holiday
+                            $amount = '';
                             break;
                     }
                     //var_dump($code, $key);
                     foreach($a as $k => $value){
                         $hours = $value['hours'];
-                        $amount = $value['amount'];
                         $rate = $value['rate'];
                         $dept = $value['dept'];
-                        $output[] = array($ee,'',$dept,'','','E',$code,(string) $rate, (string) $hours,'','','','','',''/*(string) $amount*/,'','','','','','','','','','','','','','');
+                        $output[] = array($ee,'',''/*$dept*/,'','','E',$code,(string) $rate, (string) $hours,'','','','','',$amount,'','','','','','','','','','','','','','');
                     }
                 }
             }
